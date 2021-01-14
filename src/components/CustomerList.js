@@ -87,8 +87,7 @@ export default function CustomerList() {
     ]
 
     return (
-        <div className='ag-theme-material' style={{ height: '500px', width: '60%', margin: 'auto' }}>
-            <AddCustomer addCustomer={addCustomer} />
+        <div className='ag-theme-material' style={{ height: '500px', width: '60%', margin: 'auto', marginTop: 10 }}>
             <AgGridReact
                 rowData={customers}
                 columnDefs={columns}
@@ -103,6 +102,7 @@ export default function CustomerList() {
                 animateRows={true}
             >
             </AgGridReact>
+            <AddCustomer addCustomer={addCustomer} />
             <Snackbar
                 open={snackbarOpen}
                 onClose={handleSnackbarClose}
