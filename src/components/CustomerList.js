@@ -7,6 +7,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import Snackbar from '@material-ui/core/Snackbar';
 import AddCustomer from './AddCustomer.js';
 import AddTraining from './AddTraining.js';
+import EditCustomer from './EditCustomer.js';
 
 export default function CustomerList() {
 
@@ -67,6 +68,25 @@ export default function CustomerList() {
             .catch(err => console.error(err))
     }
 
+    const editCustomer = (link, customer) => {
+        fetch(link, {
+			method: 'PUT',
+			headers: {
+				'Content-type' : 'application/json'
+			},
+			body: JSON.stringify(customer)
+		})
+		.then(response => {
+            if (response.ok) {
+                setSnackbarMessage('Customer edited successfully');
+                handleSnackbarOpen();
+                getCustomers();
+            }
+        })
+		.catch(err => console.error(err))
+	
+    }
+
     const addTraining = (newTraining) => {
         fetch('https://customerrest.herokuapp.com/api/trainings', {
             method: 'POST',
@@ -97,6 +117,12 @@ export default function CustomerList() {
             field: 'links', headerName: '',
             cellRendererFramework: params =>
                 <AddTraining customer={params.value[0].href} addTraining={addTraining} />
+        },
+        {
+            headerName: '',
+            width: 100,
+            cellRendererFramework: params =>
+                <EditCustomer customer={params} editCustomer={editCustomer} />
         },
         {
             field: 'links', headerName: '',
