@@ -54,7 +54,7 @@ export default function Trainings() {
         { field: 'duration', headerName: 'Duration (min)', sortable: true, filter: true, resizable: true, cellStyle: { textAlign: "left" } },
         {
             field: 'date', headerName: 'Date', sortable: true, filter: true, resizable: true, cellStyle: { textAlign: "left" },
-            cellRendererFramework: params => moment().format('MMMM Do YYYY, h:mm:ss a')
+            cellRendererFramework: params => moment(params.value).format('MMMM Do YYYY, h:mm:ss a')
 
         },
         { field: 'customer.firstname', headerName: 'First Name', sortable: true, filter: true, resizable: true, cellStyle: { textAlign: "left" } },
@@ -71,7 +71,7 @@ export default function Trainings() {
 
 
     return (
-        <div className='ag-theme-material' style={{ height: '500px', width: '60%', margin: 'auto', marginTop: 10 }}>
+        <div className='ag-theme-material' style={{ height: '800px', width: '60%', margin: 'auto', marginTop: 10 }}>
             <AgGridReact
                 rowData={trainings}
                 columnDefs={columns}

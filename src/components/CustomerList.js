@@ -70,21 +70,21 @@ export default function CustomerList() {
 
     const editCustomer = (link, customer) => {
         fetch(link, {
-			method: 'PUT',
-			headers: {
-				'Content-type' : 'application/json'
-			},
-			body: JSON.stringify(customer)
-		})
-		.then(response => {
-            if (response.ok) {
-                setSnackbarMessage('Customer edited successfully');
-                handleSnackbarOpen();
-                getCustomers();
-            }
+            method: 'PUT',
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify(customer)
         })
-		.catch(err => console.error(err))
-	
+            .then(response => {
+                if (response.ok) {
+                    setSnackbarMessage('Customer edited successfully');
+                    handleSnackbarOpen();
+                    getCustomers();
+                }
+            })
+            .catch(err => console.error(err))
+
     }
 
     const addTraining = (newTraining) => {
@@ -135,7 +135,7 @@ export default function CustomerList() {
     ]
 
     return (
-        <div className='ag-theme-material' style={{ height: '500px', width: '60%', margin: 'auto', marginTop: 10 }}>
+        <div className='ag-theme-material' style={{ height: '800px', width: '60%', margin: 'auto', marginTop: 10 }}>
             <AgGridReact
                 rowData={customers}
                 columnDefs={columns}
