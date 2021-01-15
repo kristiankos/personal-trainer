@@ -21,7 +21,6 @@ export default function Trainings() {
     }, []);
 
     const getTrainings = () => {
-        console.log('loading trainings');
         fetch('https://customerrest.herokuapp.com/gettrainings')
             .then(response => response.json())
             .then(data => setTrainings(data))

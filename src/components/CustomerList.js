@@ -6,6 +6,7 @@ import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Snackbar from '@material-ui/core/Snackbar';
 import AddCustomer from './AddCustomer.js';
+import AddTraining from './AddTraining.js';
 
 export default function CustomerList() {
 
@@ -20,7 +21,6 @@ export default function CustomerList() {
     }, []);
 
     const getCustomers = () => {
-        console.log('loading customers');
         fetch('https://customerrest.herokuapp.com/api/customers')
             .then(response => response.json())
             .then(data => setCustomers(data.content))
@@ -67,6 +67,23 @@ export default function CustomerList() {
             .catch(err => console.error(err))
     }
 
+    const addTraining = (newTraining) => {
+        fetch('https://customerrest.herokuapp.com/api/trainings', {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify(newTraining)
+        })
+            .then(response => {
+                if (response.ok) {
+                    console.log(response);
+                    setSnackbarMessage('Training added successfully');
+                    handleSnackbarOpen();
+                }
+            })
+            .catch(err => console.error(err))
+    }
 
     const columns = [
         { field: 'firstname', headerName: 'First Name', sortable: true, filter: true, resizable: true, cellStyle: { textAlign: "left" } },
@@ -76,6 +93,11 @@ export default function CustomerList() {
         { field: 'city', sortable: true, filter: true, resizable: true, cellStyle: { textAlign: "left" } },
         { field: 'email', sortable: true, filter: true, resizable: true, cellStyle: { textAlign: "left" } },
         { field: 'phone', sortable: true, filter: true, resizable: true, cellStyle: { textAlign: "left" } },
+        {
+            field: 'links', headerName: '',
+            cellRendererFramework: params =>
+                <AddTraining customer={params.value[0].href} addTraining={addTraining} />
+        },
         {
             field: 'links', headerName: '',
             width: 100,
