@@ -19,17 +19,22 @@ export default function TrainingCalendar() {
             .then(data => {
                 var list = [];
                 data.forEach(training => {
-                    var event = {
-                        id: training.id,
-                        title: training.activity + ' / ' + training.customer.firstname + ' ' + training.customer.lastname,
-                        start: moment(training.date).toDate(),
-                        end: moment(training.date).add(training.duration, 'minutes').toDate()
+                    try {
+                        var event = {
+                            id: training.id,
+                            title: training.activity + ' / ' + training.customer.firstname + ' ' + training.customer.lastname,
+                            start: moment(training.date).toDate(),
+                            end: moment(training.date).add(training.duration, 'minutes').toDate()
+                        }
+                        list.push(event);
+
+                    } catch {
+
                     }
-                    list.push(event);
                 });
-                return list;
+                console.log(list);
+                setTrainingEvents(list)
             })
-            .then(list => setTrainingEvents(list))
             .catch(err => console.error(err))
     }
 

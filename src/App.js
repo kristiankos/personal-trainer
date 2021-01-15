@@ -10,6 +10,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
 import CustomerList from './components/CustomerList.js';
 import Trainings from './components/Trainings.js';
+import Statistics from './components/Statistics.js';
 import TrainingCalendar from './components/TrainingCalendar.js';
 import MomentUtils from '@date-io/moment';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
@@ -56,6 +57,7 @@ function App() {
             <Route exact path="/" component={CustomerList} />
             <Route path="/trainings" component={Trainings} />
             <Route path="/calendar" component={TrainingCalendar} />
+            <Route path="/statistics" component={Statistics} />
             <Route render={() => <h1>Page not found</h1>} />
           </Switch>
         </div>
